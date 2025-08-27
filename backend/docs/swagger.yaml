@@ -1,0 +1,204 @@
+basePath: /
+definitions:
+  dtos.CreateGameRequest:
+    description: Запрос на создание игры
+    properties:
+      firstPlayerId:
+        type: string
+      line_size:
+        type: integer
+      secondPlayerId:
+        type: string
+    type: object
+  dtos.CreateGameResponse:
+    description: Ответ с созданной игрой
+    properties:
+      firstPlayerId:
+        type: string
+      gameId:
+        type: string
+      lineSize:
+        type: integer
+      secondPlayerId:
+        type: string
+      status:
+        type: string
+    type: object
+  dtos.GameStateResponse:
+    description: Состояние игры
+    properties:
+      currentPlayerId:
+        type: string
+      gameId:
+        type: string
+      line:
+        items:
+          $ref: '#/definitions/enums.PositionState'
+        type: array
+      moveCount:
+        type: integer
+      status:
+        type: string
+    type: object
+  dtos.MoveRequest:
+    description: Запрос на выполнение хода
+    properties:
+      playerId:
+        type: string
+      position:
+        type: integer
+    type: object
+  enums.PositionState:
+    enum:
+    - 0
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - Empty
+    - FirstPlayer
+    - SecondPlayer
+host: localhost:8080
+info:
+  contact: {}
+  description: API для игры в гвоздики
+  title: Nails Game API
+  version: "1.0"
+paths:
+  /api/game:
+    post:
+      consumes:
+      - application/json
+      description: Создает новую игру между двумя игроками
+      parameters:
+      - description: Данные для создания игры
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CreateGameRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/dtos.CreateGameResponse'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Создать новую игру
+      tags:
+      - games
+  /api/game/{gameId}:
+    get:
+      description: Возвращает текущее состояние указанной игры
+      parameters:
+      - description: ID игры
+        in: path
+        name: gameId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.GameStateResponse'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Получить состояние игры
+      tags:
+      - games
+  /api/game/{gameId}/move:
+    post:
+      consumes:
+      - application/json
+      description: Выполняет ход в указанной игре
+      parameters:
+      - description: ID игры
+        in: path
+        name: gameId
+        required: true
+        type: string
+      - description: Данные хода
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.MoveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dtos.GameStateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "403":
+          description: Forbidden
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Сделать ход
+      tags:
+      - games
+  /health:
+    get:
+      description: Проверяет работоспособность сервера и базы данных
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Статус сервера
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Health check
+      tags:
+      - utils
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

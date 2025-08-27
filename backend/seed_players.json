@@ -1,0 +1,14 @@
+[
+    {
+        "Id": "be3b90f9-1dae-46d3-9ec8-48ee6a77f163",
+        "Name": "Test First User",
+        "Email": "first@example.com",
+        "PasswordHash": "test-password-hash-first"
+    },
+    {
+        "Id": "d169dda3-dc03-4894-8f12-3c547b753121",
+        "Name": "Test Second User",
+        "Email": "second@example.com",
+        "PasswordHash": "test-password-hash-second"
+    }
+]
