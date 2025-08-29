@@ -5,10 +5,10 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	echoSwagger "github.com/swaggo/echo-swagger"
-	"log"
 	_ "nails_game/docs"
 
 	"nails_game/internal/controllers"
+	"nails_game/internal/helpers"
 	database "nails_game/internal/repositories"
 	repositories "nails_game/internal/repositories/implementation"
 	services "nails_game/internal/services/implemenatation"
@@ -23,14 +23,18 @@ import (
 // @in header
 // @name Authorization
 func main() {
+	logger := helpers.InitLogger()
+
 	if err := godotenv.Load(".env"); err != nil {
-		log.Printf("Warning: Could not load .env file: %v", err)
+		logger.Warnf("Could not load .env file: %v", err)
 	}
 
-	db, cfg, err := database.InitDB()
+	db, cfg, err := database.InitDB(logger)
 	if err != nil {
-		log.Fatalf("Failed to initialize database: %v", err)
+		logger.WithError(err).Fatal("Failed to initialize database")
 	}
+
+	logger.Info("Application configuration loaded")
 
 	gameRepo := repositories.NewGameRepository(db)
 	playerRepo := repositories.NewPlayerRepository(db)
@@ -53,5 +57,8 @@ func main() {
 
 	e.GET("/health", healthController.CheckHealth)
 
-	e.Logger.Fatal(e.Start(":" + cfg.Port))
+	logger.WithField("port", cfg.Port).Info("Starting server")
+	if err := e.Start(":" + cfg.Port); err != nil {
+		logger.WithError(err).Fatal("Failed to start server")
+	}
 }
