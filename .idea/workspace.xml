@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ffaf136a-26d8-45af-9864-50af2e4a7390" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/internal/helpers/logger.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/cmd/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/internal/repositories/database.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/repositories/database.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/tests/game_service_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/tests/mocks/game_repository_mock.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/internal/tests/mocks/player_repository_mock.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/backend/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/internal/services/implemenatation/game_service.go" beforeDir="false" afterPath="$PROJECT_DIR$/backend/internal/services/implemenatation/game_service.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,10 +29,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="31x9xfD6EOdWzBazLiiTD9KgZkK" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -37,10 +41,22 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "DefaultGoTemplateProperty": "Go File",
+    "Go Test.TestGameService_MakeMove in nails_game/internal/tests.executor": "Run",
+    "Go Test.TestGameService_MakeMove_GameEnded in nails_game/internal/tests.executor": "Run",
+    "Go Test.TestGameService_MakeMove_NotPlayersTurn in nails_game/internal/tests.executor": "Run",
+    "Go Test.TestGameService_MakeMove_PlayerNotAssigned in nails_game/internal/tests.executor": "Run",
+    "Go Test.TestGameService_MakeMove_PositionOccupied in nails_game/internal/tests.executor": "Run",
+    "Go Test.TestGameService_MakeMove_RaceCondition in nails_game/internal/tests.executor": "Run",
+    "Go Test.TestGameService_MakeMove_ReturnsCachedResult in nails_game/internal/tests.executor": "Run",
+    "Go Test.go test backend.executor": "Run",
+    "Go Test.go test nails_game.executor": "Run",
+    "Go Test.go test nails_game/internal/tests.executor": "Run",
+    "Go Test.go test tests.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.GoLinterPluginOnboarding": "true",
     "RunOnceActivity.GoLinterPluginStorageMigration": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
@@ -52,9 +68,103 @@
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "http.proxy"
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.notifications"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\games\Go\nails_game\backend\internal\tests" />
+      <recent name="C:\games\Go\nails_game\backend\internal\tests\game_service_tests" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Go Test.TestGameService_MakeMove_PositionOccupied in nails_game/internal/tests">
+    <configuration name="TestGameService_MakeMove_NotPlayersTurn in nails_game/internal/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="nails_game" />
+      <working_directory value="$PROJECT_DIR$/backend/internal/tests" />
+      <root_directory value="$PROJECT_DIR$/backend" />
+      <kind value="PACKAGE" />
+      <package value="nails_game/internal/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGameService_MakeMove_NotPlayersTurn\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGameService_MakeMove_PlayerNotAssigned in nails_game/internal/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="nails_game" />
+      <working_directory value="$PROJECT_DIR$/backend/internal/tests" />
+      <root_directory value="$PROJECT_DIR$/backend" />
+      <kind value="PACKAGE" />
+      <package value="nails_game/internal/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGameService_MakeMove_PlayerNotAssigned\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGameService_MakeMove_PositionOccupied in nails_game/internal/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="nails_game" />
+      <working_directory value="$PROJECT_DIR$/backend/internal/tests" />
+      <root_directory value="$PROJECT_DIR$/backend" />
+      <kind value="PACKAGE" />
+      <package value="nails_game/internal/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGameService_MakeMove_PositionOccupied\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGameService_MakeMove_RaceCondition in nails_game/internal/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="nails_game" />
+      <working_directory value="$PROJECT_DIR$/backend/internal/tests" />
+      <root_directory value="$PROJECT_DIR$/backend" />
+      <kind value="PACKAGE" />
+      <package value="nails_game/internal/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGameService_MakeMove_RaceCondition\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestGameService_MakeMove_ReturnsCachedResult in nails_game/internal/tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="nails_game" />
+      <working_directory value="$PROJECT_DIR$/backend/internal/tests" />
+      <root_directory value="$PROJECT_DIR$/backend" />
+      <kind value="PACKAGE" />
+      <package value="nails_game/internal/tests" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <pattern value="^\QTestGameService_MakeMove_ReturnsCachedResult\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go test backend" type="GoTestRunConfiguration" factoryName="Go Test" nameIsGenerated="true">
+      <module name="nails_game" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="DIRECTORY" />
+      <directory value="$PROJECT_DIR$/backend" />
+      <filePath value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Go Test.go test backend" />
+      <item itemvalue="Go Test.TestGameService_MakeMove_NotPlayersTurn in nails_game/internal/tests" />
+      <item itemvalue="Go Test.TestGameService_MakeMove_PlayerNotAssigned in nails_game/internal/tests" />
+      <item itemvalue="Go Test.TestGameService_MakeMove_PositionOccupied in nails_game/internal/tests" />
+      <item itemvalue="Go Test.TestGameService_MakeMove_RaceCondition in nails_game/internal/tests" />
+      <item itemvalue="Go Test.TestGameService_MakeMove_ReturnsCachedResult in nails_game/internal/tests" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Test.TestGameService_MakeMove_PositionOccupied in nails_game/internal/tests" />
+        <item itemvalue="Go Test.TestGameService_MakeMove_PlayerNotAssigned in nails_game/internal/tests" />
+        <item itemvalue="Go Test.TestGameService_MakeMove_NotPlayersTurn in nails_game/internal/tests" />
+        <item itemvalue="Go Test.TestGameService_MakeMove_RaceCondition in nails_game/internal/tests" />
+        <item itemvalue="Go Test.TestGameService_MakeMove_ReturnsCachedResult in nails_game/internal/tests" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

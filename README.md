@@ -13,9 +13,9 @@
 
 ## Тестирование
 
-Тестов еще нет
+Есть тесты game_service
 
 Запуск
    ```bash
-   dotnet test
+   go test -v
    ```

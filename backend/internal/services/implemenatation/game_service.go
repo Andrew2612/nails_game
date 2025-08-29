@@ -4,23 +4,20 @@ import (
 	"errors"
 	"fmt"
 	"github.com/google/uuid"
-	"sync"
-	"time"
-
 	"nails_game/internal/models"
 	"nails_game/internal/models/enums"
 	repositories "nails_game/internal/repositories/interfaces"
 	services "nails_game/internal/services/interfaces"
+	"sync"
 )
 
 type gameService struct {
 	gameRepo   repositories.GameRepository
 	playerRepo repositories.PlayerRepository
 	lineSize   int
-	cache      map[string]services.CachedMoveResult
+
 	cacheMutex sync.RWMutex
-	moveLocks  map[string]*sync.Mutex
-	locksMutex sync.Mutex
+	cache      map[string]services.CachedMoveResult
 }
 
 func NewGameService(
@@ -33,7 +30,6 @@ func NewGameService(
 		playerRepo: playerRepo,
 		lineSize:   lineSize,
 		cache:      make(map[string]services.CachedMoveResult),
-		moveLocks:  make(map[string]*sync.Mutex),
 	}
 }
 
@@ -73,13 +69,10 @@ func (s *gameService) MakeMove(move models.Move) (*services.CachedMoveResult, er
 		return &cached, nil
 	}
 
-	lock := s.getMoveLock(cacheKey)
-	lock.Lock()
-	defer lock.Unlock()
+	s.cacheMutex.Lock()
+	defer s.cacheMutex.Unlock()
 
-	s.cacheMutex.RLock()
 	cached, exists = s.cache[cacheKey]
-	s.cacheMutex.RUnlock()
 
 	if exists {
 		return &cached, nil
@@ -129,16 +122,16 @@ func (s *gameService) MakeMove(move models.Move) (*services.CachedMoveResult, er
 		ETag: uuid.New().String(),
 	}
 
-	s.cacheMutex.Lock()
-	s.cache[cacheKey] = result
-	s.cacheMutex.Unlock()
+	//s.cacheMutex.Lock()
+	//s.cache[cacheKey] = result
+	//s.cacheMutex.Unlock()
 
-	go func() {
-		time.Sleep(3 * time.Minute)
-		s.cacheMutex.Lock()
-		delete(s.cache, cacheKey)
-		s.cacheMutex.Unlock()
-	}()
+	//go func() {
+	//	time.Sleep(3 * time.Minute)
+	//	s.cacheMutex.Lock()
+	//	delete(s.cache, cacheKey)
+	//	s.cacheMutex.Unlock()
+	//}()
 
 	return &result, nil
 }
@@ -209,17 +202,4 @@ func (s *gameService) getNailsSum(game *models.Game, state enums.PositionState) 
 
 func (s *gameService) generateCacheKey(move models.Move) string {
 	return fmt.Sprintf("move:%s:%s:%d", move.GameID, move.PlayerID, move.Position)
-}
-
-func (s *gameService) getMoveLock(key string) *sync.Mutex {
-	s.locksMutex.Lock()
-	defer s.locksMutex.Unlock()
-
-	if lock, exists := s.moveLocks[key]; exists {
-		return lock
-	}
-
-	lock := &sync.Mutex{}
-	s.moveLocks[key] = lock
-	return lock
 }
